@@ -1,1 +1,2 @@
-# flappy-bird
+# Plan-fight
+game of javascript 

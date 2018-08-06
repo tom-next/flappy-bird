@@ -1,11 +1,3 @@
-const config = {
-    player_speed: 10,
-    cloud_speed: 1,
-    bullet_speed: 50,
-    fire_cooldown: 6,
-    enemy_speed: 4,
-}
-
 class GuaImage {
     constructor(game, name) {
         this.game = game
@@ -15,6 +7,8 @@ class GuaImage {
         this.y = 0
         this.w = this.texture.width
         this.h = this.texture.height
+        this.flipY = false
+        this.rotation = 0
     }
 
     static new(game, name) {

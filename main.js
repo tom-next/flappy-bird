@@ -26,6 +26,7 @@ var __main = function() {
         bird2: "img/flappy/bird2.png",
         bird3: "img/flappy/bird3.png",
         ground: "img/flappy/ground.png",
+        pipe: "img/flappy/tube2.png",
     }
     // 异步记载
     var game = Game.instance(30, images, function(game) {

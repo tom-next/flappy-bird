@@ -9,7 +9,7 @@ class Ground {
         for (var i = 0; i < 2; i++) {
             var ground = GuaImage.new(this.game, 'ground')
             ground.x = i * 310
-            ground.y = 500
+            ground.y = 520
             this.grounds.push(ground)
         }
     }

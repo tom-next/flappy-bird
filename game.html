@@ -27,8 +27,6 @@
         <script type="text/javascript" src="scene/scene_start/scene_start.js"></script>
         <script type="text/javascript" src="scene/scene_start/scene_edit.js"></script>
         <script type="text/javascript" src="scene/scene_end/scene_end.js"></script>
-        <!-- 关卡文件 -->
-        <script type="text/javascript" src="level.js"></script>
 
     </head>
     <body>
@@ -68,7 +66,8 @@
             <label>
                 <input type="range" class="gua-auto-slider"
                 name=""
-                max="1000"
+                min=${item.min || 0}
+                max=${item.max || 0}
                 value=${item.value}
                 data-value="config.${key}"
                 >

@@ -4,7 +4,8 @@ class Pipes {
         this.pipes = []
         this.pipeSpace = 150
         this.intervalSpace = 200 // 管子横向间距
-        this.columsOfPipe = 3
+        this.columsOfPipe = 3  // 管子的数量
+        this.pipeSpeed = 5 // 管子移动的速度
         for (var i = 0; i < this.columsOfPipe; i++) {
             var p1 = GuaImage.new(game, "pipe")
             p1.x = this.game.canvas.width + i * this.intervalSpace
@@ -20,6 +21,7 @@ class Pipes {
     debug() {
         this.intervalSpace = config.intervalSpace.value
         this.pipeSpace = config.pipeSpace.value
+        this.pipeSpeed = config.pipeSpeed.value
     }
     draw() {
         var context = this.game.context
@@ -55,8 +57,8 @@ class Pipes {
             let array = this.pipes
             var p1 = array[i]
             var p2 = array[i+1]
-            p1.x -= 5
-            p2.x -= 5
+            p1.x -= this.pipeSpeed
+            p2.x -= this.pipeSpeed
             if(p1.x < -100) {
                 p1.x = this.intervalSpace * this.columsOfPipe
             }

@@ -17,7 +17,10 @@ class Pipes {
             this.pipes.push(p2)
         }
     }
-
+    debug() {
+        this.intervalSpace = config.intervalSpace.value
+        this.pipeSpace = config.pipeSpace.value
+    }
     draw() {
         var context = this.game.context
         for (var p of this.pipes) {
@@ -48,10 +51,18 @@ class Pipes {
     }
 
     update() {
-        for (var p of this.pipes) {
-            p.x -= 5
-            if(p.x < -100) {
-                p.x = this.intervalSpace * this.columsOfPipe
+        for (var i = 0; i < this.pipes.length; i+=2) {
+            let array = this.pipes
+            var p1 = array[i]
+            var p2 = array[i+1]
+            p1.x -= 5
+            p2.x -= 5
+            if(p1.x < -100) {
+                p1.x = this.intervalSpace * this.columsOfPipe
+            }
+            if(p2.x < -100) {
+                p2.x = this.intervalSpace * this.columsOfPipe
+                this.resetPipesPosition(p1, p2)
             }
         }
     }

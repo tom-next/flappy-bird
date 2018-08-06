@@ -10,6 +10,7 @@
         </style>
         <!-- 引擎相关文件 -->
         <script type="text/javascript" src="game/utils.js"></script>
+        <script type="text/javascript" src="config.js"></script>
         <script type="text/javascript" src="game/game.js"></script>
         <script type="text/javascript" src="game/gua_image.js"></script>
         <script type="text/javascript" src="game/gua_label.js"></script>
@@ -37,66 +38,15 @@
             <input type="range" id=id-input-speed  value="1">
              游戏帧率
         </label>
-        <div class="">
-            <label for="">
-                <!-- input的目的是用于程序自动调整，自动绑定程序变量参数的一个按钮 -->
+        <div class="controls">
+            <!-- <label for="">
                 <input type="range" class="gua-auto-slider"
                 name=""
                 value=""
                 data-value="config.player_speed"
                 >
                 玩家速度: <span class="gua-label"></span>
-            </label>
-        </div>
-        <div class="">
-            <label for="">
-                <!-- input的目的是用于程序自动调整，自动绑定程序变量参数的一个按钮 -->
-                <input type="range" class="gua-auto-slider"
-                name=""
-                value=""
-                data-value="config.bullet_speed"
-                >
-                玩家子弹发射的速度: <span class="gua-label"></span>
-            </label>
-        </div>
-        <div class="">
-            <label for="">
-                <!-- input的目的是用于程序自动调整，自动绑定程序变量参数的一个按钮 -->
-                <input type="range" class="gua-auto-slider"
-                name=""
-                value=""
-                max="20"
-                min="0"
-                data-value="config.fire_cooldown"
-                >
-                玩家子弹冷却时间: <span class="gua-label"></span>
-            </label>
-        </div>
-        <div class="">
-            <label for="">
-                <!-- input的目的是用于程序自动调整，自动绑定程序变量参数的一个按钮 -->
-                <input type="range" class="gua-auto-slider"
-                name=""
-                value=""
-                min="-10"
-                max="10"
-                data-value="config.cloud_speed"
-                >
-                云的速度: <span class="gua-label"></span>
-            </label>
-        </div>
-        <div class="">
-            <label for="">
-                <!-- input的目的是用于程序自动调整，自动绑定程序变量参数的一个按钮 -->
-                <input type="range" class="gua-auto-slider"
-                name=""
-                value=""
-                min="-10"
-                max="10"
-                data-value="config.enemy_speed"
-                >
-                敌机的速度: <span class="gua-label"></span>
-            </label>
+            </label> -->
         </div>
     </body>
     <script type="text/javascript" src="main.js"></script>
@@ -113,19 +63,48 @@
             }
         }
 
-        bindAll(".gua-auto-slider", "input", function(event) {
-            var target = event.target
-            var bindVar = target.dataset.value
-            var v = target.value
-            eval(bindVar + '=' + v)
-            var label = target.closest('label').querySelector('.gua-label')
-            label.innerText = v
-        })
+        const itemHtml = function(key, item) {
+            var s = `
+            <label>
+                <input type="range" class="gua-auto-slider"
+                name=""
+                max="1000"
+                value=${item.value}
+                data-value="config.${key}"
+                >
+                ${item._comment}: <span class="gua-label"></span>
+            </label>
+            `
+            return s
+        }
+
+        const bindEvents = function() {
+            bindAll(".gua-auto-slider", "input", function(event) {
+                var target = event.target
+                var bindVar = target.dataset.value
+                var v = target.value
+                eval(bindVar + '.value=' + v)
+                var label = target.closest('label').querySelector('.gua-label')
+                label.innerText = v
+            })
+        }
+
+        const insertControls = function() {
+            var div = es('.controls')[0]
+            var arr = Object.keys(config)
+            log("arr", arr)
+            for (var p of arr) {
+                var t = itemHtml(p, config[p])
+                div.insertAdjacentHTML("beforeend", t)
+            }
+        }
+        var __main = function() {
+            // 从配置文件生成 HTML 控件
+            insertControls()
+            // 绑定事件
+            bindEvents()
+        }
+
+        __main()
     </script>
-
-
-
-
-
-
 </html>
